@@ -1,22 +1,19 @@
-# Virtual environment
-venv/
-
-# Python cache
+# Không push các thư mục rác
 __pycache__/
+.pytest_cache/
 *.pyc
 *.pyo
-*.pyd
 
-# Test cache
-.pytest_cache/
+# Không push môi trường ảo
+venv/
+.env/
+*.env
 
-# Model & large data
-*.h5
-*.npy
-*.png
-*.jpg
-*.jpeg
+# Không push file log hoặc file tạm
+*.log
 
-# System files
-.DS_Store
-Thumbs.db
+# Không push dataset quá nặng dạng nén (nếu có)
+*.zip
+*.tar
+*.gz
+*.rar
