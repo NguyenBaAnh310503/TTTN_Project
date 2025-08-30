@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <title>Nhận diện biển số xe</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 30px;
+        text-align: center;
+      }
+      .box {
+        max-width: 900px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #eee;
+        border-radius: 8px;
+      }
+      .images {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+      }
+      img {
+        max-width: 100%;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+      }
+      .error {
+        color: #b00020;
+      }
+      button {
+        background-color: #0cc70cff;
+        padding: 8px 14px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h2>🚗 Hệ thống nhận diện biển số xe</h2>
+      <form method="POST" enctype="multipart/form-data">
+        <input
+          type="file"
+          name="file"
+          accept="image/*"
+          onchange="previewImage(event)"
+          required
+        />
+        <button type="submit">Nhận diện</button>
+      </form>
+
+      {% if error %}
+      <p class="error">{{ error }}</p>
+      {% endif %}
+
+      <div class="images">
+        <!-- Ảnh gốc preview -->
+        <div>
+          <h4>Ảnh gốc</h4>
+          <img id="preview" src="{{ original_file }}" alt="Ảnh gốc" />
+        </div>
+
+        {% if result_file %}
+        <!-- Ảnh kết quả -->
+        <div>
+          <h4>Kết quả nhận diện</h4>
+          <img src="{{ result_file }}" alt="Kết quả" />
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <script>
+      // Hiển thị ảnh preview khi chọn file
+      function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+          var output = document.getElementById("preview");
+          output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    </script>
+  </body>
+</html>
